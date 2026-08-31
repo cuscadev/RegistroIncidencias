@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Registro de Incidencias</string>
+    <string name="titulo_pantalla">Nueva incidencia</string>
+    <string name="subtitulo_pantalla">Registra un problema para darle seguimiento.</string>
+    <string name="hint_titulo">Título</string>
+    <string name="hint_descripcion">Descripción</string>
+    <string name="guardar_incidencia">Guardar incidencia</string>
+    <string name="error_titulo">Escribe un título</string>
+    <string name="error_descripcion">Escribe una descripción</string>
+    <string name="incidencia_guardada">Incidencia guardada correctamente</string>
+</resources>

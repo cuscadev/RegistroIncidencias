@@ -1,44 +1,37 @@
 # RegistroIncidencias
 
-Aplicación Android desarrollada con Kotlin para registrar incidencias. Este proyecto corresponde a la práctica de organización, control de versiones y publicación en GitHub.
+App Android en Kotlin para registrar incidencias. Trabajo de la clase Técnicas de Producción Industrial de Software I (UTEC, ciclo 02-2026).
 
-## Funcionalidad inicial
+Repo: https://github.com/cuscadev/RegistroIncidencias
 
-- Captura el título de una incidencia.
-- Captura una descripción.
-- Valida que ambos campos estén completos.
-- Muestra una confirmación al guardar.
+## Semana 6
 
-## Tecnologías
+La pantalla ya no es solo estática. Con Compose guardo lo que escribo en estado (`remember` / `mutableStateOf`) y al tocar **Crear reporte** sale un mensaje en pantalla. Todavía no hay base de datos.
 
-- Kotlin
-- Android SDK
-- AndroidX
-- Material Design
-- Gradle
+Incluye:
+- título e instrucción
+- campos de título y descripción
+- botón Crear reporte
+- mensaje de confirmación o aviso si falta el título
 
-## Cómo abrir el proyecto
-
-1. Abre Android Studio.
-2. Selecciona **Open** y elige la carpeta `RegistroIncidencias`.
-3. Espera a que Gradle sincronice el proyecto.
-4. Ejecuta la aplicación en un emulador o dispositivo Android.
-
-## Requisitos
-
-- Android Studio
-- JDK 17
-- Android SDK 35
-
-## Estructura principal
+Separé el código en carpetas para que sea más fácil de mantener:
 
 ```text
-RegistroIncidencias/
-├── app/
-│   └── src/main/
-│       ├── java/com/example/registroincidencias/MainActivity.kt
-│       └── res/
-├── .gitignore
-├── build.gradle.kts
-└── settings.gradle.kts
+app/src/main/java/com/example/registroincidencias/
+├── MainActivity.kt
+├── domain/model/
+├── domain/usecase/
+└── ui/
+    ├── theme/
+    └── registro/
+        ├── RegistroIncidenciaUiState.kt
+        ├── RegistroIncidenciaScreen.kt
+        └── components/
 ```
+
+## Cómo correrla
+
+1. Abrir el proyecto en Android Studio.
+2. Esperar a que Gradle sincronice.
+3. Correrla en emulador o celular.
+4. Escribir algo, pulsar Crear reporte y revisar el mensaje.

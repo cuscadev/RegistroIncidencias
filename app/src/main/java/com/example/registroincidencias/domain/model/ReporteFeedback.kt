@@ -11,6 +11,14 @@ sealed class ReporteFeedback {
     fun asMensaje(): String = when (this) {
         SinReporte -> "Aún no hay reporte creado"
         TituloRequerido -> "Escribe un título antes de crear el reporte"
-        is Preparado -> "Reporte preparado: ${incidencia.tituloNormalizado}"
+        is Preparado -> {
+            val titulo = incidencia.tituloNormalizado
+            val descripcion = incidencia.descripcionNormalizada
+            if (descripcion.isEmpty()) {
+                "Reporte preparado: $titulo"
+            } else {
+                "Reporte preparado: $titulo\nDescripción: $descripcion"
+            }
+        }
     }
 }

@@ -14,6 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.registroincidencias.domain.model.ReporteFeedback
 import com.example.registroincidencias.domain.usecase.CrearReporteUseCase
 import com.example.registroincidencias.ui.registro.components.CrearReporteSection
 import com.example.registroincidencias.ui.registro.components.IncidenciaFormFields
@@ -40,7 +41,15 @@ fun RegistroIncidenciaScreen(
                 titulo = uiState.titulo,
                 descripcion = uiState.descripcion
             )
-            uiState = uiState.copy(feedback = feedback)
+            uiState = if (feedback is ReporteFeedback.Preparado) {
+                uiState.copy(
+                    titulo = "",
+                    descripcion = "",
+                    feedback = feedback
+                )
+            } else {
+                uiState.copy(feedback = feedback)
+            }
         },
         modifier = modifier
     )

@@ -17,3 +17,6 @@ local.properties
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+# Material de entrega / capturas (fuera del código fuente)
+docs/

@@ -3,7 +3,8 @@ package com.example.registroincidencias.domain.model
 /** Datos que el usuario escribe en el formulario. */
 data class Incidencia(
     val titulo: String,
-    val descripcion: String
+    val descripcion: String,
+    val prioridad: Prioridad
 ) {
     val tituloNormalizado: String
         get() = titulo.trim()

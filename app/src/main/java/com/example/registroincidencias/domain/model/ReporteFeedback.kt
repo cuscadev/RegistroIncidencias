@@ -14,10 +14,11 @@ sealed class ReporteFeedback {
         is Preparado -> {
             val titulo = incidencia.tituloNormalizado
             val descripcion = incidencia.descripcionNormalizada
+            val prioridad = incidencia.prioridad.etiqueta
             if (descripcion.isEmpty()) {
-                "Reporte preparado: $titulo"
+                "Reporte preparado: $titulo\nPrioridad: $prioridad"
             } else {
-                "Reporte preparado: $titulo\nDescripción: $descripcion"
+                "Reporte preparado: $titulo\nPrioridad: $prioridad\nDescripción: $descripcion"
             }
         }
     }

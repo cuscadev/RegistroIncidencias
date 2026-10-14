@@ -20,6 +20,7 @@ import com.example.registroincidencias.domain.model.Prioridad
 import com.example.registroincidencias.domain.model.ReporteFeedback
 import com.example.registroincidencias.domain.usecase.CrearReporteUseCase
 import com.example.registroincidencias.ui.registro.components.CrearReporteSection
+import com.example.registroincidencias.ui.registro.components.DiagnosticoDispositivoSection
 import com.example.registroincidencias.ui.registro.components.IncidenciaFormFields
 import com.example.registroincidencias.ui.registro.components.PrioridadSelector
 import com.example.registroincidencias.ui.registro.components.RegistroHeader
@@ -99,6 +100,7 @@ fun RegistroIncidenciaContent(
             mensajeFeedback = uiState.mensajeFeedback,
             onCrearReporte = onCrearReporte
         )
+        DiagnosticoDispositivoSection()
     }
 }
 

@@ -57,6 +57,15 @@ Todavía **no** se persisten datos en base de datos (fuera del alcance de este a
 - **Retroalimentación:** la tarjeta elegida se resalta y el texto `Prioridad seleccionada: …` cambia al instante. Al crear el reporte, el mensaje también muestra esa prioridad.
 - **Dificultad resuelta:** el teclado genérico no seguía el flujo del formulario (no avanzaba al siguiente campo) y no había forma de indicar urgencia sin escribirla en la descripción.
 
+## Avance semana 12 (diagnóstico del dispositivo)
+
+Sección **Diagnóstico del dispositivo** al final de la pantalla. Usa el acelerómetro:
+
+- Comprueba si el sensor existe. Si no está, muestra `Sin lectura disponible` y explica que el equipo no tiene acelerómetro.
+- Se registra en `ON_RESUME` y se libera en `ON_PAUSE`, para no seguir escuchando con la app en segundo plano.
+- La lectura se traduce a una frase: `Movimiento detectado` o `Dispositivo en reposo`. No se muestran los ejes sueltos.
+- En el emulador el acelerómetro es virtual: en reposo suele verse gravedad fija. El movimiento se prueba cambiando el sensor virtual. En un teléfono físico se comprobaría caminando y al bloquear la pantalla.
+
 ### Estructura del código
 
 ```text
@@ -78,6 +87,7 @@ app/src/main/java/com/example/registroincidencias/
 2. Esperar a que Gradle sincronice.
 3. Ejecutar en emulador o dispositivo físico.
 4. Escribir título (y opcionalmente descripción), tocar una prioridad y pulsar **Crear reporte**. Revisar el texto de prioridad y el mensaje del reporte.
+5. Bajar hasta **Diagnóstico del dispositivo** y comprobar la frase del acelerómetro.
 
 ## Commits relevantes
 
@@ -85,3 +95,4 @@ app/src/main/java/com/example/registroincidencias/
 - Pantalla de registro con estado en Compose
 - Mejora del mensaje del reporte y limpieza del formulario
 - Teclado contextual y selección táctil de prioridad (semana 10)
+- Diagnóstico del dispositivo con el acelerómetro (semana 12)

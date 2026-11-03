@@ -8,4 +8,4 @@ Práctica TPIS1: `remember` vs `rememberSaveable` en el formulario de RegistroIn
 | `02_antes_rotacion.png` | Formulario con título y descripción escritos antes de rotar |
 | `03_despues_rotacion.png` | Tras rotar: título conservado, descripción vacía |
 
-Código: `app/.../ui/registro/RegistroIncidenciaScreen.kt` — commit *Conserva estado de formulario ante recreación*.
+Código: `app/.../ui/registro/RegistroIncidenciaScreen.kt` — commit `fc59091` (*Conserva estado de formulario ante recreación*).

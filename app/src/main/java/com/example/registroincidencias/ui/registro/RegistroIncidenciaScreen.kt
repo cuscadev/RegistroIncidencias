@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,33 +32,35 @@ fun RegistroIncidenciaScreen(
     crearReporteUseCase: CrearReporteUseCase = remember { CrearReporteUseCase() },
     modifier: Modifier = Modifier
 ) {
-    var uiState by remember { mutableStateOf(RegistroIncidenciaUiState()) }
+    var titulo by rememberSaveable { mutableStateOf("") }
+    var descripcion by remember { mutableStateOf("") }
+    var prioridad by remember { mutableStateOf(Prioridad.MEDIA) }
+    var feedback by remember { mutableStateOf<ReporteFeedback>(ReporteFeedback.SinReporte) }
+
+    val uiState = RegistroIncidenciaUiState(
+        titulo = titulo,
+        descripcion = descripcion,
+        prioridad = prioridad,
+        feedback = feedback
+    )
 
     RegistroIncidenciaContent(
         uiState = uiState,
-        onTituloChange = { titulo: String ->
-            uiState = uiState.copy(titulo = titulo)
-        },
-        onDescripcionChange = { descripcion: String ->
-            uiState = uiState.copy(descripcion = descripcion)
-        },
-        onPrioridadChange = { prioridad: Prioridad ->
-            uiState = uiState.copy(prioridad = prioridad)
-        },
+        onTituloChange = { titulo = it },
+        onDescripcionChange = { descripcion = it },
+        onPrioridadChange = { prioridad = it },
         onCrearReporte = {
-            val feedback = crearReporteUseCase(
-                titulo = uiState.titulo,
-                descripcion = uiState.descripcion,
-                prioridad = uiState.prioridad
+            val result = crearReporteUseCase(
+                titulo = titulo,
+                descripcion = descripcion,
+                prioridad = prioridad
             )
-            uiState = if (feedback is ReporteFeedback.Preparado) {
-                uiState.copy(
-                    titulo = "",
-                    descripcion = "",
-                    feedback = feedback
-                )
+            if (result is ReporteFeedback.Preparado) {
+                titulo = ""
+                descripcion = ""
+                feedback = result
             } else {
-                uiState.copy(feedback = feedback)
+                feedback = result
             }
         },
         modifier = modifier

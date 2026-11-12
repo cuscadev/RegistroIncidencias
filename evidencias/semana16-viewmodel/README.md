@@ -10,4 +10,4 @@ Práctica TPIS1: título y prioridad en `RegistroIncidenciaViewModel`. La descri
 | `04_despues_rotacion.png` | Tras rotar: el título sigue; la descripción se vació |
 | `05_prioridad_despues.png` | Tras rotar, más abajo: la prioridad Alta sigue marcada |
 
-Código: `ui/registro/RegistroIncidenciaViewModel.kt` y `RegistroIncidenciaScreen.kt`.
+Código: `ui/registro/RegistroIncidenciaViewModel.kt` y `RegistroIncidenciaScreen.kt` — commit `c7c7e8b`.

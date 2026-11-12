@@ -101,4 +101,4 @@ app/src/main/java/com/example/registroincidencias/
 - Mejora del mensaje del reporte y limpieza del formulario
 - Teclado contextual y selección táctil de prioridad (semana 10)
 - Diagnóstico del dispositivo con el acelerómetro (semana 12)
-- Título y prioridad en ViewModel (semana 16)
+- Título y prioridad en ViewModel (semana 16) — commit c7c7e8b

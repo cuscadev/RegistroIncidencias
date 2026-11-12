@@ -40,7 +40,7 @@ de tickets o base de datos.
 
 ## Avance actual (pantalla inicial)
 
-La pantalla usa Compose con estado (`remember` / `mutableStateOf`):
+La pantalla usa Compose. El título y la prioridad viven en `RegistroIncidenciaViewModel`; la descripción y el mensaje del reporte siguen en el composable con `remember`:
 
 - Encabezado con título e instrucción
 - Campos de título y descripción con teclado contextual
@@ -66,6 +66,10 @@ Sección **Diagnóstico del dispositivo** al final de la pantalla. Usa el aceler
 - La lectura se traduce a una frase: `Movimiento detectado` o `Dispositivo en reposo`. No se muestran los ejes sueltos.
 - En el emulador el acelerómetro es virtual: en reposo suele verse gravedad fija. El movimiento se prueba cambiando el sensor virtual. En un teléfono físico se comprobaría caminando y al bloquear la pantalla.
 
+## Avance semana 16 (ViewModel)
+
+`RegistroIncidenciaViewModel` guarda el título y la prioridad. La pantalla no asigna esos valores: escribe con `actualizarTitulo` y elige la prioridad con `seleccionarPrioridad`. Al rotar, esos dos datos siguen porque el ViewModel sobrevive a la recreación de la Activity. La descripción se quedó con `remember`, así que se pierde al rotar (igual que en la semana 15, pero ahora el título ya no depende de `rememberSaveable`).
+
 ### Estructura del código
 
 ```text
@@ -77,6 +81,7 @@ app/src/main/java/com/example/registroincidencias/
     ├── theme/
     └── registro/
         ├── RegistroIncidenciaUiState.kt
+        ├── RegistroIncidenciaViewModel.kt
         ├── RegistroIncidenciaScreen.kt
         └── components/
 ```
@@ -96,3 +101,4 @@ app/src/main/java/com/example/registroincidencias/
 - Mejora del mensaje del reporte y limpieza del formulario
 - Teclado contextual y selección táctil de prioridad (semana 10)
 - Diagnóstico del dispositivo con el acelerómetro (semana 12)
+- Título y prioridad en ViewModel (semana 16)

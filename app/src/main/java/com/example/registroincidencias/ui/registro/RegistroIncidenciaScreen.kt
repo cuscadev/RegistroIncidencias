@@ -12,11 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.registroincidencias.domain.model.Prioridad
 import com.example.registroincidencias.domain.model.ReporteFeedback
 import com.example.registroincidencias.domain.usecase.CrearReporteUseCase
@@ -29,34 +29,34 @@ import com.example.registroincidencias.ui.theme.RegistroIncidenciasTheme
 
 @Composable
 fun RegistroIncidenciaScreen(
+    viewModel: RegistroIncidenciaViewModel = viewModel(),
     crearReporteUseCase: CrearReporteUseCase = remember { CrearReporteUseCase() },
     modifier: Modifier = Modifier
 ) {
-    var titulo by rememberSaveable { mutableStateOf("") }
+    // Descripción y feedback se quedan en la UI: remember no sobrevive a la rotación.
     var descripcion by remember { mutableStateOf("") }
-    var prioridad by remember { mutableStateOf(Prioridad.MEDIA) }
     var feedback by remember { mutableStateOf<ReporteFeedback>(ReporteFeedback.SinReporte) }
 
     val uiState = RegistroIncidenciaUiState(
-        titulo = titulo,
+        titulo = viewModel.titulo,
         descripcion = descripcion,
-        prioridad = prioridad,
+        prioridad = viewModel.prioridad,
         feedback = feedback
     )
 
     RegistroIncidenciaContent(
         uiState = uiState,
-        onTituloChange = { titulo = it },
+        onTituloChange = viewModel::actualizarTitulo,
         onDescripcionChange = { descripcion = it },
-        onPrioridadChange = { prioridad = it },
+        onPrioridadChange = viewModel::seleccionarPrioridad,
         onCrearReporte = {
             val result = crearReporteUseCase(
-                titulo = titulo,
+                titulo = viewModel.titulo,
                 descripcion = descripcion,
-                prioridad = prioridad
+                prioridad = viewModel.prioridad
             )
             if (result is ReporteFeedback.Preparado) {
-                titulo = ""
+                viewModel.limpiarTitulo()
                 descripcion = ""
                 feedback = result
             } else {
@@ -111,6 +111,12 @@ fun RegistroIncidenciaContent(
 @Composable
 private fun RegistroIncidenciaScreenPreview() {
     RegistroIncidenciasTheme {
-        RegistroIncidenciaScreen()
+        RegistroIncidenciaContent(
+            uiState = RegistroIncidenciaUiState(),
+            onTituloChange = {},
+            onDescripcionChange = {},
+            onPrioridadChange = {},
+            onCrearReporte = {}
+        )
     }
 }
